@@ -1,9 +1,14 @@
-node {
-    stage('Step1') {
-        if (env.BRANCH_NAME == 'main') {
-            echo 'Hello '
-        } else {
-            sh "echo 'Hello from ${env.BRANCH_NAME} branch!'"
+def modules = [:]
+pipeline {
+    agent any
+    stages {
+        stage('test') {
+            steps {
+                script{
+                    modules.first = load "first.groovy"
+                    modules.first.test1()
+                }
+            }
         }
     }
 }
